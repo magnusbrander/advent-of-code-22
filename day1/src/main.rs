@@ -8,13 +8,11 @@ fn main() {
 
     let mut calories_per_elf = get_calories_per_elf(&file_content);
     calories_per_elf.sort_by(|a, b| b.cmp(a));
+    
     println!("Maximum calories: {}", calories_per_elf[0]);
 
-    let mut top_three_sum = 0;
-    for i in 0..3 {
-        top_three_sum += calories_per_elf[i];
-    }
-    println!("Top 3 sum of calories: {}", top_three_sum);
+    let top_three_sum: i32 = calories_per_elf[0..3].iter().sum();
+    println!("Top 3 calories sum: {}", top_three_sum);
 }
 
 fn get_calories_per_elf(file_content: &String) -> Vec<i32> {
