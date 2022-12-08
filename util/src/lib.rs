@@ -1,4 +1,3 @@
-
 use std::collections::HashSet;
 pub fn get_char_intersection(mut sets: Vec<HashSet<char>>) -> HashSet<char> {
     if sets.len() == 0 {
@@ -25,3 +24,4 @@ pub fn get_char_intersection(mut sets: Vec<HashSet<char>>) -> HashSet<char> {
     }
     return intersection;
 }
+

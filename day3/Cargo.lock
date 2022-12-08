@@ -6,9 +6,9 @@ version = 3
 name = "day3"
 version = "0.1.0"
 dependencies = [
- "my_util",
+ "util",
 ]
 
 [[package]]
-name = "my_util"
+name = "util"
 version = "0.1.0"

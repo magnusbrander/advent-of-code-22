@@ -1,5 +1,5 @@
-extern crate my_util;
-use my_util::get_char_intersection;
+extern crate util;
+use util::get_char_intersection;
 use std::{collections::HashSet, env, fs};
 
 fn main() {
