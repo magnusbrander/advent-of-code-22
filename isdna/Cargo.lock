@@ -3,12 +3,5 @@
 version = 3
 
 [[package]]
-name = "day1"
-version = "0.1.0"
-dependencies = [
- "util",
-]
-
-[[package]]
-name = "util"
+name = "isdna"
 version = "0.1.0"

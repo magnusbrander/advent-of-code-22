@@ -1,5 +1,6 @@
 use std::env;
 use std::fs;
+use util;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -7,11 +8,11 @@ fn main() {
     let file_content = fs::read_to_string(file_path).expect("Failed to read file");
 
     let mut calories_per_elf = get_calories_per_elf(&file_content);
-    calories_per_elf.sort_by(|a, b| b.cmp(a));
-    
-    println!("Maximum calories: {}", calories_per_elf[0]);
+    util::sort_vec(&mut calories_per_elf, true);
+    let max_calories = util::get_max(&calories_per_elf);
+    let top_three_sum = util::sum_elements(&calories_per_elf[0..3], 0);
 
-    let top_three_sum: i32 = calories_per_elf[0..3].iter().sum();
+    println!("Max calories: {}", max_calories);
     println!("Top 3 calories sum: {}", top_three_sum);
 }
 
