@@ -26,7 +26,7 @@ pub fn get_char_intersection(mut sets: Vec<HashSet<char>>) -> HashSet<char> {
     return intersection;
 }
 
-pub fn get_max<T>(arr: &Vec<T>) -> T
+pub fn get_max<T>(arr: &[T]) -> T
 where
     T: PartialOrd + Copy,
 {
@@ -40,7 +40,7 @@ where
     max
 }
 
-pub fn get_min<T>(arr: &Vec<T>) -> T
+pub fn get_min<T>(arr: &[T]) -> T
 where
     T: PartialOrd + Copy,
 {
