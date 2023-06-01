@@ -2,13 +2,10 @@ extern crate util;
 mod interval;
 use crate::interval::interval_pair::IntervalPair;
 use interval::interval::Interval;
-use std::env;
-use util::read_file_into_lines;
+use util::read_file_lines;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let file_path: &String = &args[1];
-    let lines: Vec<String> = read_file_into_lines(file_path);
+    let lines: Vec<String> = read_file_lines();
     let interval_pairs = get_interval_pairs_by_lines(&lines);
 
     let nbr_contained_intervals = get_number_of_contained_intervals(&interval_pairs);
@@ -45,7 +42,7 @@ fn get_interval_by_string(interval_string: &str) -> Interval {
     return Interval { start, stop };
 }
 
-fn get_number_of_contained_intervals(intervals: &Vec<IntervalPair>) -> i32 {
+fn get_number_of_contained_intervals(intervals: &[IntervalPair]) -> i32 {
     let mut count: i32 = 0;
     for interval_pair in intervals {
         if interval_pair.is_any_contained() {
@@ -55,7 +52,7 @@ fn get_number_of_contained_intervals(intervals: &Vec<IntervalPair>) -> i32 {
     return count;
 }
 
-fn get_number_of_overlapping_intervals(intervals: &Vec<IntervalPair>) -> i32 {
+fn get_number_of_overlapping_intervals(intervals: &[IntervalPair]) -> i32 {
     let mut count = 0;
     for interval in intervals {
         if interval.overlapps() {

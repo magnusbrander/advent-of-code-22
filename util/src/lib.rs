@@ -1,4 +1,4 @@
-use std::{collections::HashSet, fs, ops::Add};
+use std::{collections::HashSet, fs, ops::Add, env};
 
 pub fn get_char_intersection(mut sets: Vec<HashSet<char>>) -> HashSet<char> {
     if sets.len() == 0 {
@@ -71,6 +71,13 @@ pub fn sort_vec<T: Ord>(vector: &mut [T], descending: bool) {
     } else {
         vector.sort_by(|a, b| a.cmp(b));
     }
+}
+
+pub fn read_file_lines() -> Vec<String> {
+    let args: Vec<String> = env::args().collect();
+    let file_path: &String = &args[1];
+    let lines: Vec<String> = read_file_into_lines(file_path);
+    lines
 }
 
 pub fn read_file_into_lines(file_path: &str) -> Vec<String> {

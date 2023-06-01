@@ -1,17 +1,15 @@
-use std::{env, fs};
+use util;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let file_path = &args[1];
-    let file_content = fs::read_to_string(file_path).expect("Failed to read file");
+    let lines = util::read_file_lines();
 
     // Naive solution.
-    let naive_points_per_game = get_naive_points_per_game(&file_content);
-    let naive_total_points: i32 = naive_points_per_game.iter().sum();
+    let naive_points_per_game = get_naive_points_per_game(&lines);
+    let naive_total_points: i32 = util::sum_elements( &naive_points_per_game, 0);
     println!("Naive total points {}", naive_total_points);
 
     // Correct solution.
-    let correct_points_per_game = get_correct_points_per_game(&file_content);
+    let correct_points_per_game = get_correct_points_per_game(&lines);
     let correct_total_points: i32 = correct_points_per_game.iter().sum();
     println!("Correct total points {}", correct_total_points);
 }
@@ -33,13 +31,13 @@ enum GameResult {
     Loss,
 }
 
-fn get_naive_points_per_game(file_content: &str) -> Vec<i32> {
-    let game_hands = get_naive_game_hands(&file_content);
+fn get_naive_points_per_game(lines: &Vec<String>) -> Vec<i32> {
+    let game_hands = get_naive_game_hands(lines);
     return get_game_points_by_hands(game_hands);
 }
 
-fn get_correct_points_per_game(file_content: &str) -> Vec<i32> {
-    let game_hands = get_correct_game_hands(file_content);
+fn get_correct_points_per_game(lines: &Vec<String>) -> Vec<i32> {
+    let game_hands = get_correct_game_hands(lines);
     return get_game_points_by_hands(game_hands);
 }
 
@@ -91,9 +89,9 @@ fn get_game_points_by_hands(game_hands: Vec<GameHands>) -> Vec<i32> {
     return points_per_game;
 }
 
-fn get_naive_game_hands(file_content: &str) -> Vec<GameHands> {
+fn get_naive_game_hands(lines: &Vec<String>) -> Vec<GameHands> {
     let mut all_game_hands: Vec<GameHands> = Vec::new();
-    for line in file_content.lines() {
+    for line in lines {
         let shapes: Vec<&str> = line.split(' ').collect();
         let opponent_shape = get_opponent_hand_by_value(shapes[0]);
         let my_shape = get_my_naive_game_shape(shapes[1]);
@@ -106,9 +104,9 @@ fn get_naive_game_hands(file_content: &str) -> Vec<GameHands> {
     return all_game_hands;
 }
 
-fn get_correct_game_hands(file_content: &str) -> Vec<GameHands> {
+fn get_correct_game_hands(lines: &Vec<String>) -> Vec<GameHands> {
     let mut all_game_hands: Vec<GameHands> = Vec::new();
-    for line in file_content.lines() {
+    for line in lines {
         let values: Vec<&str> = line.split(' ').collect();
         let opponent_hand = get_opponent_hand_by_value(values[0]);
         let game_result = get_game_result_by_encrypted_value(values[1]);

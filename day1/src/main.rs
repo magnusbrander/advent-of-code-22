@@ -1,11 +1,7 @@
-use std::env;
 use util;
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let file_path = &args[1];
-    let lines = util::read_file_into_lines(file_path);
-
+    let lines = util::read_file_lines();
     let mut calories_per_elf = get_calories_per_elf(&lines);
     util::sort_vec(&mut calories_per_elf, true);
     let max_calories = util::get_max(&calories_per_elf);
